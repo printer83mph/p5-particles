@@ -4,12 +4,13 @@ var particles = [];
 function Particle(xPos,yPos) {
   this.position = createVector(xPos,yPos);
   this.velocity = createVector(random(-5,5),random(-5,5));
-  this.color = color(random(255),random(255),random(255));
+  this.color = [random(255),random(255),random(255)];
   this.startTime = frameCount;
   this.draw = function() {
     this.position.add(this.velocity);
     this.velocity.add(0,0.5);
-    fill(this.color);
+    var lifeTime = frameCount - this.startTime;
+    fill(this.color[0],this.color[1],this.color[2],255-lifeTime*8.5);
     ellipse(this.position.x,this.position.y,minScr/20,minScr/20);
   }
 }
